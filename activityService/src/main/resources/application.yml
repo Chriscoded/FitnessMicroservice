@@ -4,7 +4,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/fitnessactivity
-      database: fitnessactivity
+#      database: fitnessactivity
 
 server:
   port: 8082
