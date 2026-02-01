@@ -5,6 +5,11 @@ spring:
   application:
     name: aiService
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/fitnessrecommendation
+  #      database: fitnessrecommendation
+
 eureka:
   client:
     service-url:
