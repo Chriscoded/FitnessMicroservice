@@ -60,7 +60,7 @@ public class UserService {
     }
 
     public Boolean existsByUserId(String userId) {
-        log.info("Calling User Validation API for UserId {}", userId);
+        log.info("In User Validation API for UserId {} ", userId);
         return repository.existsById(userId);
     }
 }
