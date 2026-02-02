@@ -8,6 +8,11 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/fitnessactivity
 #      database: fitnessactivity  # optional, overrides URI database
+  RabbitMQ:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
@@ -19,10 +24,6 @@ eureka:
     instance-id: ${spring.application.name}:${server.port}
 
 RabbitMQ:
-  host: localhost
-  port: 5672
-  username: guest
-  password: guest
   exchange:
     name: fitness.exchange
   queue:
