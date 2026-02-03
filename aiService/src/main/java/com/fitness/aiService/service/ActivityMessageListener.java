@@ -21,8 +21,12 @@ public class ActivityMessageListener {
     @Value("${rabbitmq.queue.name}")
     private  String queueNamw;
 
+    private final ActivityAIService activityAIService;
+
     @RabbitListener(queues = "activity.queue")
     public void processActivity(Activity activity){
         log.info("$ Received Activity for precessing {}", activity.getId());
+
+        log.info("$ Generated Recommendation {}", activityAIService.generateRecommendation(activity));
     }
 }
