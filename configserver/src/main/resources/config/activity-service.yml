@@ -18,10 +18,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-  instance:
-    prefer-ip-address: true
-    ip-address: 127.0.0.1
-    instance-id: ${spring.application.name}:${server.port}
+#  instance:
+#    prefer-ip-address: true
+#    ip-address: 127.0.0.1
+#    instance-id: ${spring.application.name}:${server.port}
 
 RabbitMQ:
   exchange:
