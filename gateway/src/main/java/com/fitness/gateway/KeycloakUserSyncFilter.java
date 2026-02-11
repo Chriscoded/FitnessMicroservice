@@ -17,19 +17,28 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @RequiredArgsConstructor
 public class KeycloakUserSyncFilter implements WebFilter {
-    private UserService userService;
+    private final UserService userService;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain){
         String userId = exchange.getRequest().getHeaders().getFirst("X-User-ID");
         String token = exchange.getRequest().getHeaders().getFirst("Authorization");
 
+        RegisterRequest registerRequest = getUserDetails(token);
+
+        if(userId == null){
+
+          userId =  registerRequest.getKeycloakId();
+        }
+
+
         if(userId != null && token != null){
+            String finalUserId = userId;
             return userService.validateUser(userId)
                     .flatMap(exists -> {
                         if(!exists){
-                           //Register User
-                            RegisterRequest registerRequest = getUserDetails(token);
+                            //Register User
+
 
                             if(registerRequest != null){
                                 return userService.registerUser(registerRequest)
@@ -45,13 +54,12 @@ public class KeycloakUserSyncFilter implements WebFilter {
                     })
                     .then(Mono.defer(() ->{
                         ServerHttpRequest mutatedRequest = exchange.getRequest().mutate()
-                                .header("X-User-ID", userId)
+                                .header("X-User-ID", finalUserId)
                                 .build();
 
                         return chain.filter(exchange.mutate().request(mutatedRequest).build());
-            }));
+                    }));
         }
-
         return chain.filter(exchange);
     }
 
