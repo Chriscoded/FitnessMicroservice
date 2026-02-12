@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Button } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "react-oauth2-code-pkce";
+import { useDispatch } from "react-redux";
+import { createBrowserRouter as Router, Navigate, Route, Routes, useLocation } from "react-router";
+import { RouterProvider } from "react-router/dom";
+import { setCredentials } from "./store/authSlice";
 
-function App() {
-  const [count, setCount] = useState(0)
+function Home() {
+  const { token, tokenData, logIn } = useContext(AuthContext);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Home Page</h1>
+
+      {!token ? (
+        <Button
+          variant="contained"
+          onClick={() => logIn()}
+        >
+          LOGIN
+        </Button>
+      ) : (
+        <div>
+          <pre>{JSON.stringify(tokenData, null, 2)}</pre>
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default App
+
+const router = Router([
+  {
+    path: "/",
+    element: <Home/>
+  },
+]);
+
+function App() {
+  const { token, tokenData, isAuthenticated } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const [authReady, setAuthReady] = useState(false);
+
+  useEffect(() => {
+    if(token){
+      dispatch(setCredentials({token, user: tokenData}));
+      setAuthReady(true)
+    }
+  }, [token, tokenData, dispatch])
+
+  return <RouterProvider router={router} />;
+}
+
+export default App;
+
