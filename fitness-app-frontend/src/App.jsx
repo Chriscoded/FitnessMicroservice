@@ -5,6 +5,17 @@ import { useDispatch } from "react-redux";
 import { createBrowserRouter as Router, Navigate, Route, Routes, useLocation } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import { setCredentials } from "./store/authSlice";
+import Box from '@mui/material/Box';
+import { ActivityForm } from "./components/ActivityForm";
+import ActivityList from "./components/ActivityList";
+import ActivityDetail from "./components/ActivityDetail";
+
+const ActivitiesPage = () =>{
+  <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
+    <ActivityForm onActivitiesAdded = { () => window.location.reload()}/>
+    <ActivityList/>
+  </Box>
+}
 
 function Home() {
   const { token, tokenData, logIn } = useContext(AuthContext);
@@ -21,9 +32,18 @@ function Home() {
           LOGIN
         </Button>
       ) : (
-        <div>
-          <pre>{JSON.stringify(tokenData, null, 2)}</pre>
-        </div>
+        // <div>
+        //   <pre>{JSON.stringify(tokenData, null, 2)}</pre>
+        // </div>
+
+        <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
+          
+          <Routes>
+            <Route path="/activities" element={<ActivitiesPage/>}/>
+            <Route path="/activities/:id" element={<ActivityDetail/>}/>
+            <Route path="/" element={token ? <Navigate to="/activities" replace/> : <div>Welcome Please login</div>} />
+          </Routes>
+        </Box>
       )}
     </div>
   );
@@ -32,7 +52,7 @@ function Home() {
 
 const router = Router([
   {
-    path: "/",
+    path: "*",
     element: <Home/>
   },
 ]);
