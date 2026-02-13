@@ -11,10 +11,11 @@ import ActivityList from "./components/ActivityList";
 import ActivityDetail from "./components/ActivityDetail";
 
 const ActivitiesPage = () =>{
-  <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
-    <ActivityForm onActivitiesAdded = { () => window.location.reload()}/>
-    <ActivityList/>
-  </Box>
+  return( <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
+            <ActivityForm onActivitiesAdded = { () => window.location.reload()}/>
+            <ActivityList/>
+          </Box>
+        );
 }
 
 function Home() {
