@@ -28,12 +28,15 @@ public class UserController {
 
     @GetMapping("/{userId}/validate")
     public ResponseEntity<Boolean> validateUser(@PathVariable String userId){
-        return ResponseEntity.ok(userService.existsByUserId(userId));
+
+        boolean result = userService.existsByUserId(userId);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/{userId}/validateKeyCloakId")
     public ResponseEntity<Boolean> validateKeyCloakId(@PathVariable String userId){
-        return ResponseEntity.ok(userService.existsByKeyCloakId(userId));
+        boolean result = userService.existsByKeyCloakId(userId);
+        return ResponseEntity.ok(result);
     }
 }
 
