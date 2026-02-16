@@ -57,7 +57,7 @@ export const ActivityForm = ({onActivityAdded}) => {
             onChange={(e) => setActivity({...activity, caloriesBurned: e.target.value})}
             
         />
-        <Button type='submit' value='contained'>
+        <Button type='submit' variant='contained'>
             Add Activity
         </Button>
     </Box>
