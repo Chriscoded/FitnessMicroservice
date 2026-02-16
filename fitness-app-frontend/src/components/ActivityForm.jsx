@@ -14,7 +14,7 @@ export const ActivityForm = ({onActivityAdded}) => {
         e.preventDefault();
         try {
             await addActivity(activity);
-            // onActivityAdded();
+            onActivityAdded();
             setActivity({type: "RUNNING", duration: '', caloriesBurned: ''});
         } catch (error) {
             console.error(error);
