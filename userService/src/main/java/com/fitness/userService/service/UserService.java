@@ -73,6 +73,11 @@ public class UserService {
 
     public Boolean existsByUserId(String userId) {
         log.info("In User Validation API for UserId {} ", userId);
+        return repository.existsById(userId);
+    }
+
+    public Boolean existsByKeyCloakId(String userId) {
+        log.info("In User Validation API for UserId {} ", userId);
         return repository.existsByKeycloakId(userId);
     }
 }

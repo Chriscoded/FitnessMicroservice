@@ -30,5 +30,10 @@ public class UserController {
     public ResponseEntity<Boolean> validateUser(@PathVariable String userId){
         return ResponseEntity.ok(userService.existsByUserId(userId));
     }
+
+    @GetMapping("/{userId}/validateKeyCloakId")
+    public ResponseEntity<Boolean> validateKeyCloakId(@PathVariable String userId){
+        return ResponseEntity.ok(userService.existsByKeyCloakId(userId));
+    }
 }
 

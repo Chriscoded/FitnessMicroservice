@@ -18,7 +18,7 @@ public class UserService {
         log.info("Calling User Validation API for UserId {} from gateway Service", userId);
 
         return userServiceWebClient.get()
-                .uri("/api/users/{userId}/validate", userId)
+                .uri("/api/users/{userId}/validateKeyCloakId", userId)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .onErrorResume(WebClientResponseException.class, e -> {
