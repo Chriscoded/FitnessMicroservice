@@ -13,5 +13,5 @@ public class UserResponse {
     private String firstName;
     private String lastName;
     private LocalDateTime createdAt;
-    private LocalDateTime updateddAt;
+    private LocalDateTime updatedAt;
 }

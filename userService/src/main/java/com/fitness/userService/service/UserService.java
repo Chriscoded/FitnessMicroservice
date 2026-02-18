@@ -29,7 +29,7 @@ public class UserService {
             userResponse.setLastName(existingUser.getLastName());
             userResponse.setPassword(existingUser.getPassword());
             userResponse.setCreatedAt(existingUser.getCreatedAt());
-            userResponse.setUpdateddAt(existingUser.getUpdateddAt());
+            userResponse.setUpdatedAt(existingUser.getUpdatedAt());
 
             return userResponse;
         }
@@ -50,7 +50,7 @@ public class UserService {
         userResponse.setLastName(savedUser.getLastName());
         userResponse.setPassword(savedUser.getPassword());
         userResponse.setCreatedAt(savedUser.getCreatedAt());
-        userResponse.setUpdateddAt(savedUser.getUpdateddAt());
+        userResponse.setUpdatedAt(savedUser.getUpdatedAt());
 
         return userResponse;
     }
@@ -66,7 +66,7 @@ public class UserService {
         userResponse.setLastName(user.getLastName());
         userResponse.setPassword(user.getPassword());
         userResponse.setCreatedAt(user.getCreatedAt());
-        userResponse.setUpdateddAt(user.getUpdateddAt());
+        userResponse.setUpdatedAt(user.getUpdatedAt());
 
         return userResponse;
     }
